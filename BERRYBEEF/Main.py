@@ -1,9 +1,8 @@
 import sys
 
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QTreeWidgetItem, QMenu, QInputDialog, QLineEdit, \
-    QMessageBox, QTableWidgetItem, QDialog, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QAction
 
 from BERRYBEEF.Main_UI import Ui_MainWindow
 
@@ -30,7 +29,6 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(title)
         self.resized.connect(self.adjust_objects_window)
 
-
     def resizeEvent(self, event):
         self.resized.emit()
         return super(MainWindow, self).resizeEvent(event)
@@ -51,14 +49,18 @@ class MainWindow(QMainWindow):
         self.width = self.frameGeometry().width()
         self.height = self.frameGeometry().height()
 
-
-
     def make_menu(self):
         try:
-            
+
             menubar = self.menuBar()
             fileMenu = menubar.addMenu('&Sistema')
             helpMenu = menubar.addMenu('A&juda')
+
+            exitButton = QAction(QIcon('Imagens/exit.png'), 'Sair', self)
+            exitButton.setShortcut('Ctrl+Q')
+            exitButton.setStatusTip('Exit application')
+            exitButton.triggered.connect(self.close)
+            fileMenu.addAction(exitButton)
 
             sobreButton = QAction(QIcon('Imagens/about.png'), 'Sobre', self)
             #sobreButton.triggered.connect(self.open_dialog_about)
