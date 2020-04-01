@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QAction
+from PyQt5.QtWidgets import QMainWindow, QAction, QMessageBox
 
 from BERRYBEEF.Main_UI import Ui_MainWindow
 
@@ -40,7 +40,10 @@ class MainWindow(QMainWindow):
         self.move(self.left, self.top)
 
     def setup_signals(self):
-        pass
+        self.ui.btn_config.clicked.connect(self.config)
+
+    def config(self):
+        QMessageBox.about(self, "Erro", 'Selecione o projeto para excluir')
 
     def initial_setup(self):
         self.make_menu()

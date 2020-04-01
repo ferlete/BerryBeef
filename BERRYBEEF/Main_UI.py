@@ -14,6 +14,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(831, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.btn_config = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_config.setGeometry(QtCore.QRect(320, 230, 84, 28))
+        self.btn_config.setObjectName("btn_config")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setEnabled(True)
@@ -29,6 +32,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Berry Beef Software"))
-
+        MainWindow.setWindowTitle(_translate("MainWindow", "Berry Beef 1.0"))
+        self.btn_config.setText(_translate("MainWindow", "Load Config"))
 
