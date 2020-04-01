@@ -2,6 +2,6 @@
 
 """beef.__main__: executed when beef directory is called as script."""
 
-from BERRYBEEF.beef import main
+from BERRYBEEF.berrybeef import main
 
 main()

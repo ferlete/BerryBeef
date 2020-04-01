@@ -1,4 +1,4 @@
-from BERRYBEEF.beef import main
+from BERRYBEEF.berrybeef import main
 
 
 if __name__ == '__main__':

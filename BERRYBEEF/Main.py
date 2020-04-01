@@ -78,5 +78,9 @@ class MainWindow(QMainWindow):
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(ex).__name__, ex)
 
     def config(self):
-        conf = Config()
-        conf.exec_()
+        try:
+            conf = Config()
+            conf.exec_()
+
+        except Exception as ex:
+            print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(ex).__name__, ex)
