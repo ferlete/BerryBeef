@@ -11,5 +11,6 @@ CSV_EXTENSION = ".csv"
 CONFIG_EXTENSION = ".conf"
 SOFTWARE_NAME = "Berry Beef 0.1"
 DESCRIPTION_NAME = "Software para predição de qualidade de carnes bovinas"
+BUFFER_SIZE = 1024
 
 

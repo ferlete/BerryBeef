@@ -5,6 +5,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QAction, QMessageBox
 
 from BERRYBEEF.Main_UI import Ui_MainWindow
+from BERRYBEEF.Config import Config
+
 
 class MainWindow(QMainWindow):
 
@@ -40,10 +42,7 @@ class MainWindow(QMainWindow):
         self.move(self.left, self.top)
 
     def setup_signals(self):
-        self.ui.btn_config.clicked.connect(self.config)
-
-    def config(self):
-        QMessageBox.about(self, "Erro", 'Selecione o projeto para excluir')
+        pass
 
     def initial_setup(self):
         self.make_menu()
@@ -59,6 +58,12 @@ class MainWindow(QMainWindow):
             fileMenu = menubar.addMenu('&Sistema')
             helpMenu = menubar.addMenu('A&juda')
 
+            configButton = QAction(QIcon('Imagens/exit.png'), 'Configurar', self)
+            configButton.setShortcut('Ctrl+C')
+            configButton.setStatusTip('Sincronizar com Softbeef')
+            configButton.triggered.connect(self.config)
+            fileMenu.addAction(configButton)
+
             exitButton = QAction(QIcon('Imagens/exit.png'), 'Sair', self)
             exitButton.setShortcut('Ctrl+Q')
             exitButton.setStatusTip('Exit application')
@@ -71,3 +76,7 @@ class MainWindow(QMainWindow):
 
         except Exception as ex:
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(ex).__name__, ex)
+
+    def config(self):
+        conf = Config()
+        conf.exec_()
