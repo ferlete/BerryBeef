@@ -49,11 +49,12 @@ class Config(QDialog):
             ip = self.ui.txt_ip.text()
             port = self.ui.txt_port.text()
             client = Client()
-            self.ui.progressBar.setVisible(True)
+
             client.countChanged.connect(self.onCountChanged)
             if not client.connect(ip, port):
                 QMessageBox.about(self, "Erro", 'Servidor Indisponivel')
             else:
+                self.ui.progressBar.setVisible(True)
                 if client.retr_file():
                     QMessageBox.about(self, "Info", 'Sincronismo Finalizada')
                 else:
