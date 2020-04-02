@@ -1,10 +1,11 @@
-import sys
-import threading
 import socket
-
+from PyQt5.QtCore import QThread, pyqtSignal
 from BERRYBEEF.constants import *
 
-class Client:
+
+class Client(QThread):
+    countChanged = pyqtSignal(int)
+    count = 0
 
     def __init__(self):
         super().__init__()
@@ -40,7 +41,9 @@ class Client:
 
                 filename = raw.strip().decode()
                 length = int(clientfile.readline())
-                print(b'Downloading {filename}...\n  Expecting {length:,} bytes...', end='', flush=True)
+                print("[+] Downloading {}...\n  Expecting {} bytes...".format(filename,length))
+                self.count += 1
+                self.countChanged.emit(self.count)
 
                 path = os.path.join('', filename)
                 os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -54,9 +57,12 @@ class Client:
                         f.write(data)
                         length -= len(data)
                     else:  # only runs if while doesn't break and length==0
-                        print('Complete')
+                        #print('Complete')
                         continue
 
+
                 # socket was closed early.
-                print('Incomplete')
+                #print('Incomplete')
+                return False
                 break
+        return True

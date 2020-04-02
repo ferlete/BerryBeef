@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(289, 138)
+        Dialog.resize(301, 158)
         self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(90, 90, 181, 31))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -36,6 +36,11 @@ class Ui_Dialog(object):
         self.lbl_port = QtWidgets.QLabel(Dialog)
         self.lbl_port.setGeometry(QtCore.QRect(200, 20, 81, 20))
         self.lbl_port.setObjectName("lbl_port")
+        self.progressBar = QtWidgets.QProgressBar(Dialog)
+        self.progressBar.setGeometry(QtCore.QRect(0, 130, 291, 23))
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName("progressBar")
+        self.progressBar.setMaximum(5)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -49,5 +54,3 @@ class Ui_Dialog(object):
         self.txt_port.setText(_translate("Dialog", "8080"))
         self.lb_ip.setText(_translate("Dialog", "IP Servidor"))
         self.lbl_port.setText(_translate("Dialog", "Porta"))
-
-
