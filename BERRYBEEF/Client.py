@@ -16,14 +16,13 @@ class Client:
         # allow python to use recently closed socket
         self.socketClient.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-
     def connect(self, ip, port):
         try:
             self.server_address = (ip, int(port))
 
             # Connect the socket to the port where the server is listening
             self.socketClient.connect(self.server_address)
-            print(self.socketClient)
+            #print(self.socketClient)
             if not self.socketClient:
                 return False
             else:
@@ -34,25 +33,30 @@ class Client:
 
     def retr_file(self):
 
-        filename = "model.csv"
-        with open(filename, 'wb') as f:
-            print("[+] filename open %s" % filename)
-            data = self.socketClient.recv(BUFFER_SIZE)
-            #print("[+] received file %s from %s" % (self.filename, addr))
-            print('data=%s', (data))
+        with self.socketClient, self.socketClient.makefile('rb') as clientfile:
+            while True:
+                raw = clientfile.readline()
+                if not raw: break  # no more files, server closed connection.
 
-            #buffer_data = data
+                filename = raw.strip().decode()
+                length = int(clientfile.readline())
+                print(b'Downloading {filename}...\n  Expecting {length:,} bytes...', end='', flush=True)
 
-            try:
-                while (data):
-                    f.write(data)
-                    data = self.socketClient.recv(BUFFER_SIZE)
-                    print("received message: %s" % data)
-                self.socketClient.close()
-                print("[+] File Downloaded")
-                f.close()
-                self.socketClient.close()
+                path = os.path.join('', filename)
+                os.makedirs(os.path.dirname(path), exist_ok=True)
 
-            except Exception as ex:
-                print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(ex).__name__, ex)
+                # Read the data in chunks so it can handle large files.
+                with open(path, 'wb') as f:
+                    while length:
+                        chunk = min(length, BUFFER_SIZE)
+                        data = clientfile.read(chunk)
+                        if not data: break
+                        f.write(data)
+                        length -= len(data)
+                    else:  # only runs if while doesn't break and length==0
+                        print('Complete')
+                        continue
 
+                # socket was closed early.
+                print('Incomplete')
+                break
