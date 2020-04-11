@@ -1,8 +1,15 @@
 import git
-import os
+changed_files = []
 
+#https://www.devdungeon.com/content/working-git-repositories-python
 if __name__ == "__main__":
-   g = git.Git('/home/ferlete/gitAAA/')
-   g.pull('origin', 'master')
+    # so isto daqui atualiza repositorio local
+    #g = git.Git('/home/ferlete/gitAAA/')
+    # g.pull('origin', 'master')
 
-   #tester
+    repo = git.Repo("/home/ferlete/gitAAA/")
+    if repo.is_dirty(untracked_files=True):
+       print('Changes detected.')
+
+
+

@@ -14,3 +14,8 @@ DESCRIPTION_NAME = "Software para predição de qualidade de carnes bovinas"
 BUFFER_SIZE = 1024
 
 
+## Module Constants
+DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S%z"
+EMPTY_TREE_SHA   = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+
+
