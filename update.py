@@ -7,7 +7,11 @@ if __name__ == "__main__":
     # g.pull('origin', 'origin/master')
 
     repo = git.Repo("/home/ferlete/gitAAA/")
-if repo.is_dirty(untracked_files=True):
-    print('Changes detected.')
-else:
-    print('not changes detected')
+
+    # List remotes
+    print('Remotes:')
+    for remote in repo.remotes:
+        print("{}:{}".format(remote.name, remote.url))
+        #print(repo.head.commit.tree)
+
+    print(repo.git.diff("origin/master", "update.py"))
