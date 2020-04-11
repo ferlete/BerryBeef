@@ -14,4 +14,4 @@ if __name__ == "__main__":
         print("{}:{}".format(remote.name, remote.url))
         #print(repo.head.commit.tree)
 
-    print(repo.git.diff("origin/master", "update.py"))
+    print(repo.git.diff("origin/master", "version.txt"))
