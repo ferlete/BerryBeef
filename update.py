@@ -1,4 +1,5 @@
 import git
+from urlparse import urlparse
 
 # https://www.devdungeon.com/content/working-git-repositories-python
 if __name__ == "__main__":
@@ -7,11 +8,14 @@ if __name__ == "__main__":
     # g.pull('origin', 'origin/master')
 
     repo = git.Repo("/home/ferlete/gitAAA/")
+    heads = repo.heads
+    print(heads)
+    headcommit = repo.head.commit
+    import time
+    time.asctime(time.gmtime(headcommit.committed_date))
+    print(time.strftime("%a,%d%b %Y %H:%M", time.gmtime(headcommit.committed_date)))
+    print(headcommit.diff('version.txt'))
 
-    # List remotes
-    print('Remotes:')
-    for remote in repo.remotes:
-        print("{}:{}".format(remote.name, remote.url))
-        #print(repo.head.commit.tree)
 
-    print(repo.git.diff("origin/master", "version.txt"))
+    parsed = urlparse('http://netloc/path;parameters?query=argument#fragment')
+    print parsed
