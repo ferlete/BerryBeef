@@ -1,5 +1,5 @@
 import git
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 # https://www.devdungeon.com/content/working-git-repositories-python
 if __name__ == "__main__":
@@ -18,4 +18,4 @@ if __name__ == "__main__":
 
 
     parsed = urlparse('http://netloc/path;parameters?query=argument#fragment')
-    print parsed
+    print(parsed)
