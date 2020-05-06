@@ -27,11 +27,11 @@ class Calcule(object):
             dataframe.astype(float)
             reference.astype(float)
             for i in range(dataframe.shape[0]):
-                print(dataframe.iloc[i].astype(float))
-                print(reference.iloc[i].astype(float))
+                #print(dataframe.iloc[i].astype(float))
+                #print(reference.iloc[i].astype(float))
                 #sys.exit()
                 trans = dataframe.iloc[i].astype(float) - (reference.iloc[i].astype(float))
-                print(trans)
+                #print(trans)
                 abs.append(self.absorbance(trans))
 
             ret = pd.DataFrame(abs)
