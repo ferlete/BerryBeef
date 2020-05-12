@@ -21,6 +21,7 @@ class MainWindow(QMainWindow):
     def __init__(self, title, width, height, parent=None):
         super(MainWindow, self).__init__(parent=parent)
         self.setWindowIcon(QtGui.QIcon('Imagens/beef.jpg'))
+        self.project_selected = ""
 
         self.title = title
         self.left = 0
@@ -100,7 +101,7 @@ class MainWindow(QMainWindow):
         try:
 
             file = FileIO()
-            config_file = DB_FOLDER + self.project_selected + "/config.ini"
+            config_file = DB_FOLDER  + "/config.ini"
 
             if file.file_exists(config_file):
                 trm_name, _ = QFileDialog.getOpenFileName(self, 'Open TRM File', 'TRM', 'TRM(*.TRM)')
